@@ -26,6 +26,7 @@ export class HeroesComponent implements OnInit {
   {
     this.selectedHero = hero;
     this.messageService.add(`HeroesComponent: Selcted hero id=${hero.id}`);
+    //to use interpolation in a string uses ` `
   }
 
   getHeroes()
