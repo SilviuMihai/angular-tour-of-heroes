@@ -13,6 +13,10 @@ export class HeroService {
 
   private heroesUrl = 'api/heroes';
 
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
+
   constructor(private http: HttpClient,private messageService: MessageService) { }
 
   /** Log a HeroService message with the MessageService */
@@ -61,5 +65,22 @@ export class HeroService {
       catchError(this.handleError<Hero>(`getHero id=${id}`))
     );
   }
+
+  updateHero(hero: Hero):Observable<Hero>
+  {
+    /** PUT: update the hero on the server */
+    return this.http.put(this.heroesUrl, hero, this.httpOptions)
+    .pipe(
+      tap(_ => this.log(`updated hero id=${hero.id}`)),
+      catchError(this.handleError<any>('updateHero'))
+    );
+  }
 }
 /* Note the backticks ( ` ) that define a JavaScript template literal for embedding the id. */
+
+
+/* The HttpClient.put() method takes three parameters:
+
+the URL
+the data to update (the modified hero in this case)
+options */
