@@ -37,7 +37,8 @@ export class HeroesComponent implements OnInit {
 
   delete(hero:Hero)
   {
-    this.heroes = this.heroes.filter(h => h !== hero);
+    this.heroes = this.heroes.filter(h => h !== hero); //refreshes the page with the heroes - 
+    //heores it is declared as a list and it is used in the HTML
     this.heroService.deleteHero(hero).subscribe();
   }
 }
